@@ -10,6 +10,13 @@ class FactSeeder extends Seeder {
      * Run the database seeds.
      */
     public function run(): void {
-        Fact::create( [ 'fact' => 'woisjawel' ] );
+        $path = __DIR__ . '/facts.txt';
+        foreach ( file( $path ) as $line ) {
+            if ( ! $line ) {
+                continue;
+            }
+
+            Fact::create( [ 'fact' => $line ] );
+        }
     }
 }
