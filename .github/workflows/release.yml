@@ -15,7 +15,7 @@ jobs:
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Zip application
-        run: zip -r laravel-test.zip .
+        run: zip -r laravel-test.zip . -x ".git/*"
       - name: Move release to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -31,4 +31,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           port: 22
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: cd /data/sites/web/wiersmatestnl/subsites/dev.wiersmatest.nl && unzip laravel-test.zip && chmod +x deploy.sh && ./deploy.sh
+          script: cd /data/sites/web/wiersmatestnl/subsites/dev.wiersmatest.nl && unzip -o laravel-test.zip && chmod +x deploy.sh && ./deploy.sh
