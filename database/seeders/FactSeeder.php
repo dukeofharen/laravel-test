@@ -16,7 +16,7 @@ class FactSeeder extends Seeder {
                 continue;
             }
 
-            Fact::create( [ 'fact' => $line ] );
+            Fact::create( [ 'fact' => str_replace( PHP_EOL, '', $line ) ] );
         }
     }
 }
