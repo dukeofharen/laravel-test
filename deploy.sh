@@ -1,5 +1,11 @@
 #!/bin/bash
 echo "Executing migrations"
+
+if [ ! -f "database/database.sqlite" ]; then
+    echo "Creating database database/database.sqlite"
+    touch "database/database.sqlite"
+fi
+
 php artisan migrate --force
 if [ ! -f ".env" ]; then
     echo "Moving .env.example to .env"
