@@ -31,4 +31,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           port: 22
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: cd /data/sites/web/wiersmatestnl/subsites/dev.wiersmatest.nl && unzip -o laravel-test.zip && chmod +x deploy.sh && ./deploy.sh
+          script: cd /data/sites/web/wiersmatestnl/subsites/dev.wiersmatest.nl && unzip -o laravel-test.zip && chmod +x deploy.sh && ./deploy.sh && rm laravel-test.zip
