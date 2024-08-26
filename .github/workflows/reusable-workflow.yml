@@ -2,9 +2,7 @@ name: Reusable workflow example
 
 on:
   workflow_call:
-    secrets:
-      token:
-        required: true
+    secrets: inherit
 
 jobs:
   triage:
