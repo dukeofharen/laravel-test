@@ -6,9 +6,6 @@ on:
       target:
         required: true
         type: string
-      testString:
-        required: true
-        type: string
     secrets:
       sshHost:
         required: true
@@ -19,4 +16,4 @@ jobs:
     environment: ${{ inputs.target }}
     steps:
       - name: Echo
-        run: echo "Yo ${{ secrets.sshHost }} ${{ inputs.target }} ${{ inputs.testString }}"
+        run: echo "Yo ${{ secrets.SSH_HOST }} ${{ inputs.target }} ${{ vars.TEST_STRING }}"
