@@ -6,9 +6,6 @@ on:
       target:
         required: true
         type: string
-    secrets:
-      sshHost:
-        required: true
 
 jobs:
   triage:
