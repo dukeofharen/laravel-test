@@ -19,4 +19,4 @@ jobs:
     environment: ${{ inputs.target }}
     steps:
       - name: Echo
-        run: echo "Yo ${{ secrets.sshHost }} ${{ inputs.target }}"
+        run: echo "Yo ${{ secrets.sshHost }} ${{ inputs.target }} ${{ inputs.testString }}"
