@@ -1,4 +1,4 @@
-name: Reusable workflow example
+name: Deployment base
 
 on:
   workflow_call:
@@ -23,16 +23,16 @@ jobs:
       - name: Move release to server
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
+          host: ${{ vars.SSH_HOST }}
+          username: ${{ vars.SSH_USERNAME }}
           port: 22
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ vars.SSH_PRIVATE_KEY }}
           source: "laravel-test.zip"
           target: /data/sites/web/wiersmatestnl/subsites/dev.wiersmatest.nl
       - uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
+          host: ${{ vars.SSH_HOST }}
+          username: ${{ vars.SSH_USERNAME }}
           port: 22
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ vars.SSH_PRIVATE_KEY }}
           script: cd /data/sites/web/wiersmatestnl/subsites/dev.wiersmatest.nl && unzip -o laravel-test.zip && chmod +x deploy.sh && ./deploy.sh && rm laravel-test.zip
