@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -26,6 +26,7 @@ class Fact extends Model {
 	use HasFactory, HasTimestamps;
 
 	protected $fillable = [
-		'fact'
+		'fact',
+        'author'
 	];
 }
