@@ -11,3 +11,4 @@ jobs:
     uses: dukeofharen/laravel-test/.github/workflows/deployment-base.yml@master
     with:
       target: ${{ matrix.target }}
+      secrets: inherit
