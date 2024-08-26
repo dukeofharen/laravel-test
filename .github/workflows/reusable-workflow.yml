@@ -6,6 +6,9 @@ on:
       target:
         required: true
         type: string
+      testString:
+        required: true
+        type: string
     secrets:
       sshHost:
         required: true
