@@ -6,6 +6,7 @@ on:
       target:
         required: true
         type: string
+    secrets:
 
 jobs:
   triage:
