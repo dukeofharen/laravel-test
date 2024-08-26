@@ -7,7 +7,7 @@ jobs:
   ReuseableMatrixJobForDeployment:
     strategy:
       matrix:
-        environment: [test, staging]
+        target: [test, staging]
     uses: dukeofharen/laravel-test/.github/workflows/reusable-workflow.yml@master
     with:
       target: ${{ matrix.target }}
