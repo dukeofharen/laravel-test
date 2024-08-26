@@ -6,20 +6,26 @@ on:
       target:
         required: true
         type: string
+      zipName:
+        type: string
+        default: "laravel-app.zip"
+      deploymentScriptName:
+        type: string
+        default: "deploy.sh"
 
 jobs:
   triage:
     runs-on: ubuntu-latest
     environment: ${{ inputs.target }}
     steps:
-      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      - uses: shivammathur/setup-php@main
         with:
           php-version: '8.3'
       - uses: actions/checkout@v4
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Zip application
-        run: zip -r laravel-test.zip . -x ".git/*"
+        run: zip -r ${{ inputs.zipName }} . -x ".git/*"
       - name: Move release to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -27,12 +33,12 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           port: 22
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "laravel-test.zip"
-          target: /data/sites/web/wiersmatestnl/subsites/dev.wiersmatest.nl
+          source: ${{ inputs.zipName }}
+          target: ${{ vars.DEPLOYMENT_DIR }}
       - uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
-          port: 22
+          port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: cd /data/sites/web/wiersmatestnl/subsites/dev.wiersmatest.nl && unzip -o laravel-test.zip && chmod +x deploy.sh && ./deploy.sh && rm laravel-test.zip
+          script: cd ${{ vars.DEPLOYMENT_DIR }} && unzip -o ${{ inputs.zipName }} && chmod +x ${{ inputs.deploymentScriptName }} && ./${{ inputs.deploymentScriptName }} && rm ${{ inputs.zipName }}
