@@ -11,6 +11,6 @@ jobs:
     uses: dukeofharen/laravel-test/.github/workflows/reusable-workflow.yml@master
     with:
       target: ${{ matrix.target }}
-      testString: ${{ inputs.TEST_STRING }}
+      testString: ${{ vars .TEST_STRING }}
     secrets:
       sshHost: ${{ secrets.SSH_HOST }}
